@@ -1,0 +1,397 @@
+## orchestrator: 5 sessions, 1262 bash calls
+### tools
+1262	Bash
+47	AskUserQuestion
+37	Read
+29	Edit
+27	Write
+22	mcp__claude-in-chrome__browser_batch
+21	Skill
+12	Agent
+10	ToolSearch
+9	Monitor
+7	mcp__hindsight-local__hindsight_search_knowledge_pages
+7	TaskStop
+6	mcp__claude-in-chrome__computer
+5	Artifact
+3	mcp__claude-in-chrome__navigate
+### skills
+5	herdr
+3	pr
+3	mp-code-review
+2	to-spec
+2	implement-spec
+1	specdocs:prd
+1	to-tickets
+1	writing-for-agents
+1	typesafe-ai
+1	anthropic-skills:chrome-browser
+1	visual-pr
+### commands
+210	gh pr view
+182	herdr pane run
+148	sleep
+131	herdr pane read
+125	gh project item-edit
+94	git log
+91	herdr pane get
+87	git worktree
+83	git fetch
+72	curl
+69	gh issue view
+66	gh api
+62	git diff
+54	herdr pane rename
+53	git status
+52	gh project item-list
+41	git merge-base
+41	gh run list
+38	gh pr merge
+36	git branch
+30	git show
+30	git push
+28	herdr pane close
+23	git pull
+23	git rev-parse
+23	gh run view
+22	herdr pane send-keys
+20	gh issue comment
+19	bun run verify
+18	git add
+18	git commit
+18	herdr agent prompt
+17	herdr pane list
+16	bunx biome check
+15	gh issue list
+14	lsof
+14	bun run check
+13	gh issue edit
+13	herdr agent wait
+12	bun run test:cloudflare
+12	gh pr diff
+11	herdr pane layout
+11	bun run test:deployed
+11	bun run build
+10	gh project field-list
+10	bun install --frozen-lockfile
+10	bun test 2>&1
+9	gh pr edit
+9	gh pr checks
+9	node
+9	bun run typecheck
+9	bunx vitest run
+8	gh pr create
+8	herdr wait agent-status
+8	gh pr list
+7	bun run data:sync
+7	gh pr comment
+7	bun run routes:sync
+7	bun run test:stories
+7	git merge
+6	gh issue create
+6	git checkout
+6	kill
+6	gh run watch
+6	gh workflow list
+5	herdr 2>&1
+5	gh label list
+5	bun test tests/unit/reader-vocabulary.test.ts
+5	git ls-files
+5	git ls-remote
+
+## executor: 40 sessions, 4361 bash calls
+### tools
+4361	Bash
+229	Read
+116	Agent
+95	Write
+81	Skill
+42	Edit
+41	ToolSearch
+19	mcp__hindsight-local__hindsight_search_knowledge_pages
+13	TaskStop
+13	SendMessage
+10	mcp__cloudflare__docs
+10	mcp__claude-in-chrome__computer
+8	ScheduleWakeup
+7	mcp__hindsight-local__hindsight_capture_initiative
+6	AskUserQuestion
+### skills
+31	mp-code-review
+25	pr
+17	tdd
+7	typesafe-ai
+1	claude-in-chrome
+### commands
+352	git log
+346	bunx biome check
+204	gh issue view
+203	git commit
+190	git diff
+186	git add
+179	git status
+161	sleep
+151	git fetch
+151	gh pr view
+150	git worktree
+145	bun run typecheck
+136	bun run lint
+132	curl
+126	git rev-parse
+122	bun run test:stories
+121	git push
+114	gh api
+108	gh project item-edit
+106	bun run verify
+99	gh project item-list
+88	node
+73	gh pr edit
+69	git show
+68	gh run view
+67	bun run build
+65	bun test 2>&1
+65	bun run check
+58	bun run test:browser
+55	bun install --frozen-lockfile
+55	gh run list
+53	bun run test:cloudflare
+50	git stash
+50	bun run test:deployed
+49	git branch
+46	gh pr create
+43	git rebase
+43	git checkout
+42	bun run data:sync
+41	bunx biome format
+40	bun test tests/unit
+40	git merge
+40	gh pr checks
+38	bunx tsc --noEmit
+38	kill
+35	bun test tests/unit/overview-evidence.test.ts
+35	bunx playwright test
+33	bun test tests/unit/resort-content.test.ts
+33	lsof
+30	bun run typecheck:storybook
+28	gh project field-list
+27	pkill
+27	gh pr ready
+25	bun test tests/unit/astro-components.test.ts
+23	gh run watch
+21	gh project view
+21	git merge-base
+20	bun run screens
+19	bun run test:fixture
+18	gh pr merge
+18	bun test tests/unit/page-structure.test.ts
+17	bun run doctor
+17	bun --version
+17	gh issue comment
+16	bun test tests/unit/record-text.test.ts
+14	bun test tests/unit/reader-vocabulary.test.ts
+13	gh issue list
+13	bun test tests/unit/workflows.test.ts
+13	bunx astro build
+12	gh pr list
+
+## other: 44 sessions, 1694 bash calls
+### tools
+1694	Bash
+172	Read
+59	Write
+38	ToolSearch
+27	mcp__exa__web_search_exa
+19	Agent
+19	SendUserFile
+18	AskUserQuestion
+18	Skill
+17	mcp__hindsight-local__hindsight_search_knowledge_pages
+16	Edit
+16	Monitor
+9	mcp__claude-in-chrome__browser_batch
+8	WebSearch
+7	mcp__claude-in-chrome__computer
+### skills
+3	typesafe-ai
+3	pr
+3	impeccable
+2	writing-for-agents
+2	visual-pr
+2	mp-code-review
+1	implement
+1	grilling
+1	agent-browser
+### commands
+152	git status
+145	git log
+125	node
+124	curl
+119	sleep
+88	git diff
+83	bunx biome check
+76	git commit
+75	gh pr view
+73	gh api
+67	bun run build
+65	git push
+63	git worktree
+58	git branch
+58	bun run typecheck
+55	git add
+45	kill
+43	gh run view
+41	git show
+40	git fetch
+38	bun run check
+36	gh issue view
+33	bun run test:cloudflare
+32	bun run verify
+30	git checkout
+29	gh pr edit
+27	bun test 2>&1
+27	lsof
+26	bun run lint
+26	gh run list
+26	git rev-parse
+24	gh project item-edit
+23	bun run test:browser
+22	bun run test:deployed
+21	gh project item-list
+16	git pull
+15	bun install --frozen-lockfile
+15	bun run format
+14	gh pr create
+14	gh pr merge
+14	pkill
+13	git stash
+13	git check-ignore
+13	bun run data:sync
+12	bunx biome lint
+12	gh run watch
+12	gh pr list
+10	git ls-files
+10	bun test tests/unit/workflows.test.ts
+10	wrangler
+10	gh pr ready
+10	bun run test:stories
+9	bun --version
+9	bun run routes:sync
+8	bunx biome format
+8	bun test tests/unit
+8	gh workflow run
+8	git apply
+7	gh project field-list
+7	bunx wrangler preview
+6	gh issue list
+6	bun run deploy:check
+6	bun test tests/unit/schema.test.ts
+6	gh pr comment
+6	bun -e '
+5	gh project view
+5	bunx astro build
+5	git merge-base
+5	git rebase
+5	gh issue comment
+
+## memory: 123 sessions, 0 bash calls
+### tools
+1036	Read
+519	mcp__hindsight__hindsight_ingest_document
+407	Glob
+120	ToolSearch
+8	Grep
+### skills
+
+### commands
+
+
+## subagent: 146 sessions, 2423 bash calls
+### tools
+2423	Bash
+224	Read
+77	mcp__claude-in-chrome__browser_batch
+50	Edit
+48	Write
+26	mcp__claude-in-chrome__javascript_tool
+21	Skill
+19	SubagentHandback
+16	ToolSearch
+10	mcp__claude-in-chrome__computer
+9	mcp__claude-in-chrome__find
+6	Agent
+5	mcp__claude-in-chrome__tabs_context_mcp
+5	TaskStop
+5	Monitor
+### skills
+21	tdd
+### commands
+387	git diff
+208	git log
+138	git status
+129	gh issue view
+93	git commit
+92	node
+89	bunx biome check
+83	curl
+77	git add
+70	bun run check
+65	git show
+59	git fetch
+57	sleep
+55	bun run test:stories
+49	git rev-parse
+46	git merge
+33	bun run data:sync
+32	git merge-base
+31	bun test tests/unit/workflows.test.ts
+26	bun test tests/unit/preview-status.test.ts
+23	bun run typecheck:storybook
+22	git grep
+22	bun run lint
+21	bun run test:fixture
+21	lsof
+20	bun install --frozen-lockfile
+19	bun test tests/unit/preview-validation.test.ts
+19	bun test tests/unit/resort-content.test.ts
+19	bunx playwright test
+18	git worktree
+18	bunx biome format
+18	npx
+18	bun run screens
+16	bun run storybook:build
+15	git push
+15	bun test tests/unit/resort-page.test.ts
+14	bun --version
+14	bun run test:browser
+13	git checkout
+13	bunx vitest run
+11	pkill
+11	bun run typecheck
+10	gh run view
+9	bunx tsc --noEmit
+9	bun run verify
+9	bun test tests/unit/resort-index.test.ts
+8	git stash
+8	bun run build
+8	git branch
+8	bun test tests/unit
+7	gh pr view
+7	bun test tests/unit/doctor.test.ts
+7	bun test tests/unit/summaries.test.ts
+7	git pull
+6	bun run doctor
+6	bun -v
+6	bun test tests/unit/verification-cli.test.ts
+5	bun test tests/unit/format.test.ts
+5	bun -e 'import
+5	git check-ignore
+5	bun test tests/unit/ci-build.test.ts
+5	git archive
+5	bun test tests/unit/seo.test.ts
+5	bun test tests/unit/
+4	bun test tests/unit/sitemap.test.ts
+4	bun run deploy:check
+4	bunx astro build
+4	bun test tests/unit/astro-components.test.ts
+4	bun test tests/unit/snapshot-cache.test.ts
+3	bun test tests/unit/routes-sync.test.ts
