@@ -109,7 +109,7 @@ You are the sole merger, and only with merge authority granted for this run. Mer
 
 2. Confirm the evidence covers everything the project requires for that exact head.
 3. Read any changed assertions in the test diff, and confirm each has a replacement or a reason.
-4. Take the PR body's open questions to the owner, with a recommended option, and relay the answers before merging. Read its "Choices made" too: send one that departs from what the ticket says back to its executor as rework, and take one to the owner only if it falls under Owner decisions.
+4. Take the PR body's open questions to the owner, with a recommended option, and relay the answers before merging. Read its "Choices made" too, against the ticket's exact words. Send a choice back to its executor as rework when it contradicts those words, widens something they name specifically (one method now answering for all), or leaves the project's verification passing only in this run's environment. Take a choice to the owner only if it falls under Owner decisions.
 5. Confirm reviewer findings are fixed or judged not to block.
 
 Then `gh pr merge <n> --merge --match-head-commit <sha>`, and as one bundle:
