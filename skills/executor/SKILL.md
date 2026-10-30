@@ -37,7 +37,7 @@ Building is done when that run exits 0 on the final, committed code. A fix after
 
 1. **Draft PR:** push, and open a draft PR with `Closes #<n>`, against your base.
 2. **Remaining checks:** finish whatever the project requires after a PR exists, against your exact head. A check you could not run counts as not passing, and the PR says so.
-3. **Evidence:** record what the project requires in the PR body for your exact head. List your choices under "Owner decisions / Open questions".
+3. **Evidence:** record what the project requires in the PR body for your exact head. Under "Choices made", list the calls you took where the ticket was silent. Under "Open questions", or the project's heading for them, list only what the owner must decide before this merges, or write "None".
 4. **Ready:** mark the PR ready through the guard, which refuses on a dirty tree, a different head, or placeholders in the body:
 
    `node <this skill's directory>/scripts/pr-ready.ts --pr <n>`

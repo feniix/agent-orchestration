@@ -109,14 +109,14 @@ You are the sole merger, and only with merge authority granted for this run. Mer
 
 2. Confirm the evidence covers everything the project requires for that exact head.
 3. Read any changed assertions in the test diff, and confirm each has a replacement or a reason.
-4. Take open questions from the PR body to the owner, with a recommended option where they are owner decisions, and relay the answers before merging.
+4. Take the PR body's open questions to the owner, with a recommended option, and relay the answers before merging. Read its "Choices made" too, and take one to the owner only if it falls under Owner decisions.
 5. Confirm reviewer findings are fixed or judged not to block.
 
 Then `gh pr merge <n> --merge --match-head-commit <sha>`, and as one bundle:
 
 - Read back the PR and issue state, and set the ticket to Done.
 - Clear dependencies on the tickets it unblocks, and start them.
-- Send every live executor an `Orchestrator note` naming the merged PR, the new main SHA and the modules it touched. Tell it to rebase when it reaches a stopping point, before its next push, then follow its re-entry chain.
+- Send every live executor an `Orchestrator note` naming the merged PR, the new main SHA and the modules it touched, and tell it to hold its rebase until its turn. A PR's turn comes when it is ready and next to merge: tell its executor to rebase and follow its re-entry chain. One rebase at a time means each PR verifies once, against the main it merges onto.
 - Reset the finished executor's pane if a ticket is waiting for it, and close it otherwise.
 
 A merge leaves production as it is; deploying needs its own owner request.
@@ -133,4 +133,4 @@ The run is done when every ticket is merged, blocked on the owner or held back.
 - Check the run's port blocks. Identify each listener and stop only leftovers from this run.
 - Pull the base branch at the repo root.
 
-Give the owner a final table of each ticket, its PR and state, the merges made, and every gate that did not pass. Removing worktrees and branches, ticking acceptance criteria, closing parents and archiving tickets wait for the owner to ask.
+Give the owner a final table of each ticket, its PR and state, the merges made, every gate that did not pass, and the executors' choices you merged past. Removing worktrees and branches, ticking acceptance criteria, closing parents and archiving tickets wait for the owner to ask.
