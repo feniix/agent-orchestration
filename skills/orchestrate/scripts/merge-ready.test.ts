@@ -33,3 +33,8 @@ test("open questions end at the next heading", () => {
   assert.equal(openQuestions(body), "- Which?");
   assert.equal(openQuestions("## Summary\nx"), "");
 });
+
+test("open questions leave out the attribution footer", () => {
+  const footer = "🤖 Generated with [Claude Code](https://claude.com/claude-code)";
+  assert.equal(openQuestions(`## Open questions\nNone.\n\n${footer}`), "None.");
+});

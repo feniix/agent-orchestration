@@ -6,7 +6,7 @@ Written 2026-10-30 at the end of a session started in `/Users/feniix/src/persona
 
 The owner asked for an orchestrator skill and an executor skill, generic and drafted at repo level in `nextsnowline`, based on `/Users/feniix/src/personal/nextsnowline/docs/owner/multi-agent-orchestration.md`. The drafts then moved here because they are project-agnostic, and in that repo they failed `tests/unit/workflows.test.ts:226` (a skills allowlist) and AGENTS.md's "no extra project skills" rule. That repo is clean again, with nothing committed.
 
-This directory is not a git repository. Nothing has been committed, installed or run for real.
+At the time, this directory was not a git repository and nothing had been committed, installed or run for real. It is a repository now, and `AGENTS.md` tracks what has run.
 
 ## Owner's working rules
 
@@ -30,7 +30,7 @@ These follow real sessions, which are newer than the doc. The owner has seen thi
 
 - PRs open as drafts and go ready after evidence is recorded.
 - Ports live in the pane's environment, so they survive a reset.
-- Rebasing after a merge waits for the executor's next stopping point, before its next push.
+- Rebasing happens one PR at a time, when a PR is ready and next to merge. This replaced waiting for each executor's next stopping point, after the first real run.
 - Reviewers use a detached checkout (`gh pr checkout <pr> --detach`) and re-review each new head.
 - Each merge is followed by one bundle: read back state, set Done, unblock tickets, notify executors.
 - Executors re-record a baseline only when the owner approved that exact change.
@@ -53,7 +53,6 @@ Considered and left out: a third `WORKER RESULT` form, polling PR comment rows, 
 1. **Install location.** Recommended: `~/dotfiles/agents/skills`, symlinked into `~/.claude/skills`, `~/.agents/skills` and `~/.pi/agent/skills` as the owner's other generic skills are, because Claude and pi both load from there. The owner has not confirmed this, and it changes user-level setup.
 2. **`executor/scripts/run-gate.ts`.** Kept for now: it names no test command and records the real exit code, since sessions showed pipes hiding failures. It does shape how agents run verification, so the owner may drop it.
 3. **`docs/handoffs/session-mining/`.** The owner renamed and moved it but did not answer whether to keep it. Deleting it was recommended; it is kept until told otherwise, and regenerating it would need the script.
-4. **Git.** Whether to make this directory a repository.
 
 ## Also here
 

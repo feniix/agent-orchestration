@@ -41,6 +41,7 @@ export function evaluate(pr: PullRequest, containsBase: boolean): Check[] {
 }
 
 // The section under the first heading naming open questions, up to the next heading of any level.
+// A PR's attribution footer lands in the section when it comes last, so it is dropped.
 export function openQuestions(body: string): string {
   const lines = body.split("\n");
   const start = lines.findIndex((line) => /^#+ .*open questions/i.test(line));
@@ -49,6 +50,7 @@ export function openQuestions(body: string): string {
   const end = rest.findIndex((line) => /^#+ /.test(line));
   return rest
     .slice(0, end < 0 ? undefined : end)
+    .filter((line) => !line.startsWith("🤖 Generated with "))
     .join("\n")
     .trim();
 }

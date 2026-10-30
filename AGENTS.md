@@ -31,8 +31,9 @@ Each pair changes in the same edit:
 
 - **Typecheck:** unavailable, because there is no `package.json` or Node type definitions.
 - **Evals:** none yet. Keep `skill-creator` workspaces outside `skills/`, so they never install as skills.
-- **Real runs:** none yet, and only a real run exercises spawning, watching and merging. Also unexercised: `merge-ready.ts` on an open PR, and the `gh pr ready` step in `pr-ready.ts`, which needs a throwaway draft PR because it changes the PR.
+- **Real runs:** two so far, each four small tickets in a throwaway repo. They exercised spawning Claude and pi, watching, owner relay, rebasing, merging and the `gh pr ready` step. Unexercised: merge conflicts, a dead or stalled executor, the reviewer path, heavy evidence requirements, a real codebase, and the rework rule, trust-prompt line and read-back retry added after those runs.
+- **Unwatched stalls:** an orchestrator cut off by an API error shows the same `idle` status as one waiting for the owner, and nothing wakes it.
 
 ## Using the skills
 
-Neither is installed yet, so sessions cannot load them from here. Once installed, the owner runs `/orchestrate` in a target project; the Kickoff section of `orchestrate/SKILL.md` lists what it needs.
+Neither is installed at user level, because the install location is undecided. Sessions started in this repo load them through `.claude/skills` and `.agents/skills`, and a target project needs its own links to `skills/`, kept out of its commits by `.git/info/exclude`. The owner then runs `/orchestrate` there; the Kickoff section of `orchestrate/SKILL.md` lists what it needs.

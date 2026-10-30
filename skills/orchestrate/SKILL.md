@@ -65,7 +65,7 @@ First input, as one real skill invocation. A prose description of the steps make
 
 Add what is already merged when the ticket follows others, and the base branch when it is stacked.
 
-A spawn is done when the agent reports working. Send input only once the agent is ready, then confirm: a first input can sit unsent in the prompt, so inspect it before sending anything twice.
+A spawn is done when the agent reports working. Send input only once the agent is ready, then confirm: a first input can sit unsent in the prompt, so inspect it before sending anything twice. A folder trust prompt can stop a first launch, and its default exits the agent; the owner chose this repo, so accept it.
 
 Set Ready, Done and dependency fields on the tracker; executors set In Progress and In Review, unless the project's tracker rules say otherwise.
 
@@ -109,12 +109,12 @@ You are the sole merger, and only with merge authority granted for this run. Mer
 
 2. Confirm the evidence covers everything the project requires for that exact head.
 3. Read any changed assertions in the test diff, and confirm each has a replacement or a reason.
-4. Take the PR body's open questions to the owner, with a recommended option, and relay the answers before merging. Read its "Choices made" too, and take one to the owner only if it falls under Owner decisions.
+4. Take the PR body's open questions to the owner, with a recommended option, and relay the answers before merging. Read its "Choices made" too: send one that departs from what the ticket says back to its executor as rework, and take one to the owner only if it falls under Owner decisions.
 5. Confirm reviewer findings are fixed or judged not to block.
 
 Then `gh pr merge <n> --merge --match-head-commit <sha>`, and as one bundle:
 
-- Read back the PR and issue state, and set the ticket to Done.
+- Read back the PR and issue state, and set the ticket to Done. A failed read-back says nothing about the merge, so retry it before the rest of the bundle.
 - Clear dependencies on the tickets it unblocks, and start them.
 - Send every live executor an `Orchestrator note` naming the merged PR, the new main SHA and the modules it touched, and tell it to hold its rebase until its turn. A PR's turn comes when it is ready and next to merge: tell its executor to rebase and follow its re-entry chain. One rebase at a time means each PR verifies once, against the main it merges onto.
 - Reset the finished executor's pane if a ticket is waiting for it, and close it otherwise.

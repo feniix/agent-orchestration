@@ -38,4 +38,16 @@ test("the gate wrapper logs output and passes on the real exit code", () => {
     encoding: "utf8",
   });
   assert.equal(passing.status, 0);
+  assert.equal(JSON.parse(passing.stdout).error, null);
+});
+
+test("the gate wrapper names a command that cannot start", () => {
+  const log = join(mkdtempSync(join(tmpdir(), "run-gate-")), "gate.log");
+  const script = fileURLToPath(new URL("./run-gate.ts", import.meta.url));
+  const missing = spawnSync(process.execPath, [script, "--log", log, "--", "no-such-command-xyz"], {
+    encoding: "utf8",
+  });
+  assert.equal(missing.status, 1);
+  assert.match(JSON.parse(missing.stdout).error, /no-such-command-xyz/);
+  assert.match(readFileSync(log, "utf8"), /no-such-command-xyz/);
 });

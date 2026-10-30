@@ -4,10 +4,11 @@
 //
 //   run-gate.ts --log <path> -- <command> [args...]
 //
-// Prints JSON { exit, head, dirty, seconds, log } and exits with the command's own code.
+// Prints JSON { exit, signal, error, head, dirty, seconds, log } and exits with the command's own
+// code. A command that cannot start exits 1, with the reason in both error and the log.
 
 import { spawnSync } from "node:child_process";
-import { closeSync, openSync } from "node:fs";
+import { closeSync, openSync, writeSync } from "node:fs";
 import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 
@@ -30,12 +31,15 @@ if (import.meta.main) {
   const fd = openSync(log, "w");
   const started = Date.now();
   const result = spawnSync(command, args, { stdio: ["ignore", fd, fd] });
+  const error = result.error?.message ?? null;
+  if (error) writeSync(fd, `${error}\n`);
   closeSync(fd);
   const exit = result.status ?? 1;
   console.log(
     JSON.stringify({
       exit,
       signal: result.signal,
+      error,
       head: git("rev-parse", "HEAD"),
       dirty: Boolean(git("status", "--porcelain")),
       seconds: Math.round((Date.now() - started) / 1000),
