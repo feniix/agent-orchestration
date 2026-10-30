@@ -41,7 +41,7 @@ Considered and left out: a third `WORKER RESULT` form, polling PR comment rows, 
 
 ## Session review coverage
 
-`session-mining/mine/report.txt` is the output, and `session-mining/mine.ts` hardcodes `nextsnowline` as its filter. Of 358 sessions it classified 5 orchestrator, 40 executor, 44 other, 123 memory and 146 subagent.
+`docs/handoffs/session-mining/mine/report.txt` is the output, and `docs/handoffs/session-mining/mine.ts` hardcodes `nextsnowline` as its filter. Of 358 sessions it classified 5 orchestrator, 40 executor, 44 other, 123 memory and 146 subagent.
 
 - Read closely: the 5 orchestrator sessions and part of the executor sessions.
 - Lightly covered: the 44 other sessions, mostly by first message.
@@ -52,7 +52,7 @@ Considered and left out: a third `WORKER RESULT` form, polling PR comment rows, 
 
 1. **Install location.** Recommended: `~/dotfiles/agents/skills`, symlinked into `~/.claude/skills`, `~/.agents/skills` and `~/.pi/agent/skills` as the owner's other generic skills are, because Claude and pi both load from there. The owner has not confirmed this, and it changes user-level setup.
 2. **`executor/scripts/run-gate.ts`.** Kept for now: it names no test command and records the real exit code, since sessions showed pipes hiding failures. It does shape how agents run verification, so the owner may drop it.
-3. **`session-mining/`.** The owner renamed it but did not answer whether to keep it. Deleting it was recommended; it is kept until told otherwise, and regenerating it would need the script.
+3. **`docs/handoffs/session-mining/`.** The owner renamed and moved it but did not answer whether to keep it. Deleting it was recommended; it is kept until told otherwise, and regenerating it would need the script.
 4. **Git.** Whether to make this directory a repository.
 
 ## Also here

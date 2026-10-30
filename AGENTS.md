@@ -2,7 +2,7 @@
 
 Development home of the `orchestrate` and `executor` skills, which run several tickets at once with agents in Herdr panes. Orchestrations themselves run in target projects.
 
-`session-mining/` is a one-off review of one project's Claude sessions, kept as a record and excluded from installs.
+`docs/handoffs/session-mining/` is a one-off review of one project's Claude sessions, kept as a record and excluded from installs.
 
 ## Changing a skill
 
