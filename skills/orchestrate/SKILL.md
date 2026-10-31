@@ -85,11 +85,12 @@ Run background watchers over every live pane, polling about every 30 seconds. Ea
 
 It prints the `WORKER RESULT` and `REVIEW RESULT` lines that are new since the baseline, which it takes on a pane's first read. Its state file makes restarts safe, so re-arm a watcher after each note you send.
 
-Also catch blocked panes, and panes idle for about 10 minutes, from their agent status. Herdr can report `done` while an executor's background checks still run, so trust the result line over the status. In a zsh watcher, `status` is a read-only variable.
+Also catch blocked panes from their agent status, and read a pane as soon as it goes `done` or `idle` with no new result line, because the agent may have stopped for good. Herdr can report `done` while an executor's background checks still run, so trust the result line and the pane's text over the status. In a zsh watcher, `status` is a read-only variable.
 
 ### When an executor stalls
 
 - **Died mid-task:** relaunch it and tell it what it was doing and how to finish: continue, re-verify, push and report.
+- **Stopped on a provider error or refusal:** take what it already found from its pane, then restart it. If its provider refuses again, use the other agent and say so in your report.
 - **Waiting on something dead,** such as a build of a superseded head: tell it to stop that wait and take the next step.
 - **Unsent text stuck in its prompt:** interrupting exits the agent, so follow with a pane reset.
 
