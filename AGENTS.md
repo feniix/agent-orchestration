@@ -30,9 +30,11 @@ Each pair changes in the same edit:
 ## Gaps
 
 - **Typecheck:** unavailable, because there is no `package.json` or Node type definitions.
-- **Evals:** none yet. Keep `skill-creator` workspaces outside `skills/`, so they never install as skills.
-- **Real runs:** two so far, each four small tickets in a throwaway repo. They exercised spawning Claude and pi, watching, owner relay, rebasing, merging and the `gh pr ready` step. Unexercised: merge conflicts, a dead or stalled executor, the reviewer path, heavy evidence requirements, a real codebase, and the rework rule, trust-prompt line and read-back retry added after those runs.
+- **Evals:** no `skill-creator` evals yet, and the scenario runs below are not repeatable from this repo. Keep `skill-creator` workspaces outside `skills/`, so they never install as skills.
+- **Real runs:** thirteen so far, all on small tickets in throwaway repos and each run once. They exercised spawning Claude and pi, watching, owner relay, rebasing with a real conflict, merging, the `gh pr ready` step, a killed executor, a killed orchestrator, tickets the PR widened, owner-only values, a baseline gate, stale evidence, the reviewer path and heavy evidence. Unexercised: a real codebase, a read-back retry, and reading a stopped pane right away, which was added after the run that needed it.
 - **Unwatched stalls:** an orchestrator cut off by an API error shows the same `idle` status as one waiting for the owner, and nothing wakes it.
+- **Repeated result lines:** a watcher can re-report an old result line, whose cause is unconfirmed. Orchestrators have discarded these by SHA so far, and only `merge-ready.ts` guards it.
+- **Mixed agent rules:** the owner's pi instructions ban AI attribution trailers and Claude's do not, so a pi reviewer flags Claude executors' commits. This is undecided.
 
 ## Using the skills
 
