@@ -118,3 +118,17 @@ test('second supervisor cannot act on the same run', async t => {
     assert.equal(result[0], 1); assert.match(second.output(), /EEXIST/); assert.equal(f.calls(), 0);
   } finally { await first.stop(); }
 });
+test('hook deadline does not wait for a descendant holding inherited pipes', async t => {
+  const dir = mkdtempSync(join(tmpdir(), 'hook-descendant-')), pidFile = join(dir, 'pid');
+  t.after(() => {
+    try { process.kill(Number(readFileSync(pidFile, 'utf8')), 'SIGKILL'); } catch {}
+    rmSync(dir, { recursive: true });
+  });
+  const code = `const {spawn}=require('node:child_process'); const {writeFileSync}=require('node:fs');
+    const child=spawn(process.execPath,['-e','setInterval(()=>{},1000)'],{stdio:'inherit'});
+    writeFileSync(process.argv[1],String(child.pid)); setInterval(()=>{},1000);`;
+  const started = Date.now();
+  await assert.rejects(hook([process.execPath, '-e', code, pidFile], {}, 250), /timeout.*uncertain/);
+  assert.ok(existsSync(pidFile), 'fixture descendant started');
+  assert.ok(Date.now() - started < 1500, 'deadline must not wait for long-lived descendant');
+});

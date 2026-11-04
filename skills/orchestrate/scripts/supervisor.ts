@@ -50,21 +50,31 @@ export function policy(run: Run, o: Observation): 'hold' | 'watch' | 'recover' |
 export async function hook(argv: string[], input: unknown, timeoutMs: number): Promise<unknown> {
   return new Promise((resolve, reject) => {
     const child = spawn(argv[0], argv.slice(1), { stdio: ['pipe', 'pipe', 'pipe'] });
-    let output = '', size = 0, failure: Error | undefined;
-    const timer = setTimeout(() => { failure = new Error('hook timeout; delivery may be uncertain'); child.kill('SIGKILL'); }, timeoutMs);
+    let output = '', size = 0, settled = false;
+    const fail = (error: Error) => {
+      if (settled) return;
+      settled = true; clearTimeout(timer);
+      child.kill('SIGKILL');
+      // Descendants may retain inherited pipes. They must not own our timeout or shutdown.
+      child.stdin.destroy(); child.stdout.destroy(); child.stderr.destroy(); child.unref();
+      reject(error);
+    };
+    const timer = setTimeout(() => fail(new Error('hook timeout; delivery may be uncertain')), timeoutMs);
     child.stdout.on('data', chunk => {
       size += chunk.length;
-      if (size > 1024 * 1024) { failure = new Error('hook output limit'); child.kill('SIGKILL'); }
+      if (size > 1024 * 1024) fail(new Error('hook output limit; delivery may be uncertain'));
       else output += chunk;
     });
     // Drain stderr without putting potentially private transport output in state or logs.
     child.stderr.resume();
     child.stdin.on('error', () => {});
-    child.on('error', error => { clearTimeout(timer); reject(error); });
+    child.on('error', fail);
     child.on('close', code => {
-      clearTimeout(timer);
-      if (failure || code !== 0) { reject(failure ?? new Error(`hook exited ${code}; delivery may be uncertain`)); return; }
-      try { resolve(JSON.parse(output)); } catch { reject(new Error('hook did not return JSON')); }
+      if (settled) return;
+      if (code !== 0) { fail(new Error(`hook exited ${code}; delivery may be uncertain`)); return; }
+      let reply: unknown;
+      try { reply = JSON.parse(output); } catch { fail(new Error('hook did not return JSON')); return; }
+      settled = true; clearTimeout(timer); resolve(reply);
     });
     child.stdin.end(JSON.stringify(input));
   });
