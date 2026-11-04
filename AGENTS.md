@@ -32,7 +32,7 @@ Each pair changes in the same edit:
 - **Typecheck:** unavailable, because there is no `package.json` or Node type definitions.
 - **Evals:** no `skill-creator` evals yet, and the scenario runs below are not repeatable from this repo. Keep `skill-creator` workspaces outside `skills/`, so they never install as skills.
 - **Real runs:** thirteen so far, all on small tickets in throwaway repos and each run once. They exercised spawning Claude and pi, watching, owner relay, rebasing with a real conflict, merging, the `gh pr ready` step, a killed executor, a killed orchestrator, tickets the PR widened, owner-only values, a baseline gate, stale evidence, the reviewer path and heavy evidence. Unexercised: a real codebase, a read-back retry, and reading a stopped pane right away, which was added after the run that needed it.
-- **Unwatched stalls:** an orchestrator cut off by an API error shows the same `idle` status as one waiting for the owner, and nothing wakes it.
+- **Recovery:** the independent supervisor and durable controller are covered by executable process fixtures, including a killed orchestrator. Live Herdr transport adapters, prompt readback and relaunch behavior remain unverified; configure and validate them inside Herdr before enabling recovery. Supervisor/host crashes require explicit stale-lock reconciliation, not automatic lock stealing.
 - **Repeated result lines:** a watcher can re-report an old result line, whose cause is unconfirmed. Orchestrators have discarded these by SHA so far, and only `merge-ready.ts` guards it.
 - **Mixed agent rules:** the owner's pi instructions ban AI attribution trailers and Claude's do not, so a pi reviewer flags Claude executors' commits. This is undecided.
 
