@@ -10,6 +10,12 @@ You are the **orchestrator**. You plan, spawn, brief, watch, relay, sequence, re
 
 Project instructions (`AGENTS.md`, `CLAUDE.md` and the docs they name) override the defaults here. Load the `herdr` skill before any pane work: it owns how panes and agents are created, driven, read and waited on.
 
+## Durable lifecycle and independent recovery
+
+For every run, follow [the run-controller protocol](references/run-controller.md) to persist ticket transitions and start a supervisor independent of this agent. It owns dependency eligibility and recovery bookkeeping; Herdr owns pane transport. Keep the durable run directory in the run brief. Validate the run-local transport adapters before enabling recovery; if the environment cannot support them, report recovery as unavailable rather than claiming supervision.
+
+Record owner waits before ending a turn, worker waits before yielding to executors, and pause immediately when the owner says wait. On recovery, reconcile panes, attempts and PR state before sending new work or repeating a merge. The controller's state does not replace evidence review or grant merge authority.
+
 ## Kickoff
 
 The owner's kickoff supplies:
@@ -113,9 +119,9 @@ You are the sole merger, and only with merge authority granted for this run. Mer
 4. Take the PR body's open questions to the owner, with a recommended option, and relay the answers before merging. Read its "Choices made" too, against the ticket's exact words. Send a choice back to its executor as rework when it contradicts those words, widens something they name specifically (one method now answering for all), or leaves the project's verification passing only in this run's environment. Take a choice to the owner only if it falls under Owner decisions.
 5. Confirm reviewer findings are fixed or judged not to block.
 
-Then `gh pr merge <n> --merge --match-head-commit <sha>`, and as one bundle:
+Record exact-head merge authorization through the controller. Then `gh pr merge <n> --merge --match-head-commit <sha>`, and as one bundle:
 
-- Read back the PR and issue state, and set the ticket to Done. A failed read-back says nothing about the merge, so retry it before the rest of the bundle.
+- Read back the PR and issue state, record the confirmed merge in the controller, and set the ticket to Done. A failed read-back says nothing about the merge, so retry it before the rest of the bundle.
 - Clear dependencies on the tickets it unblocks, and start them.
 - Send every live executor an `Orchestrator note` naming the merged PR, the new main SHA and the modules it touched, and tell it to hold its rebase until its turn. A PR's turn comes when it is ready and next to merge: tell its executor to rebase and follow its re-entry chain. One rebase at a time means each PR verifies once, against the main it merges onto.
 - Reset the finished executor's pane if a ticket is waiting for it, and close it otherwise.
