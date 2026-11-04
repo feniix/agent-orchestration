@@ -50,4 +50,3 @@ Approved by Seb in Discord on 2026-11-04 after requesting recovery rather than s
 - [ ] Crash/idle recovery and pause boundaries validated with executable fixtures.
 - [ ] Existing tests pass; documentation describes adapter setup and recovery boundaries.
 - [ ] PR includes spec, validation evidence and remaining live-environment gaps.
-
